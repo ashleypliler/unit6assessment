@@ -4,6 +4,15 @@ const app = express()
 const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
 
+const Rollbar = require('rollbar')
+const rollbar = new Rollbar({
+  accessToken: 'b3e0b27fe1ca4cefa7c9edc5cdb97453',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
+
+rollbar.log('Hello world!')
+
 app.use(express.json())
 app.use(express.static(path.join(__dirname, '/public')));
 app.get("/styles", function(req, res) {
