@@ -13,7 +13,7 @@ var rollbar = new Rollbar({
 
 
 rollbar.log('Hello world!')
-rollbar.log(botsArr)
+rollbar.log(playerRecord)
 rollbar.log(bots)
 rollbar.log('Choose your bots!')
 rollbar.log(shuffleArray)
