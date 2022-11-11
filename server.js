@@ -10,13 +10,7 @@ var rollbar = new Rollbar({
   captureUncaught: true,
   captureUnhandledRejections: true,
 })
-
-
 rollbar.log('Hello world!')
-rollbar.log(playerRecord)
-rollbar.log(bots)
-rollbar.log('Choose your bots!')
-rollbar.log(shuffleArray)
 
 app.use(express.json())
 app.use(express.static(path.join(__dirname, '/public')));
@@ -35,6 +29,7 @@ app.get('/api/robots', (req, res) => {
         res.sendStatus(400)
     }
 })
+rollbar.log('bots chosen!')
 
 app.get('/api/robots/five', (req, res) => {
     try {
@@ -47,12 +42,13 @@ app.get('/api/robots/five', (req, res) => {
         res.sendStatus(400)
     }
 })
+rollbar.log('got 5 random bots!')
 
 app.post('/api/duel', (req, res) => {
     try {
         // getting the duos from the front end
         let {compDuo, playerDuo} = req.body
-
+        
         // adding up the computer player's total health and attack damage
         let compHealth = compDuo[0].health + compDuo[1].health
         let compAttack = compDuo[0].attacks[0].damage + compDuo[0].attacks[1].damage + compDuo[1].attacks[0].damage + compDuo[1].attacks[1].damage
@@ -64,7 +60,7 @@ app.post('/api/duel', (req, res) => {
         // calculating how much health is left after the attacks on each other
         let compHealthAfterAttack = compHealth - playerAttack
         let playerHealthAfterAttack = playerHealth - compAttack
-
+        
         // comparing the total health to determine a winner
         if (compHealthAfterAttack > playerHealthAfterAttack) {
             playerRecord.losses++
@@ -78,6 +74,7 @@ app.post('/api/duel', (req, res) => {
         res.sendStatus(400)
     }
 })
+rollbar.log('bots are dueling')
 
 app.get('/api/player', (req, res) => {
     try {
@@ -87,6 +84,7 @@ app.get('/api/player', (req, res) => {
         res.sendStatus(400)
     }
 })
+rollbar.log('getting result of duel')
 
 const port = process.env.PORT || 3000
 

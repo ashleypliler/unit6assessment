@@ -1,9 +1,9 @@
 const {shuffleArray} = require('./utils')
 
-describe('shuffleArray should', () => {
-   expect(typeof shuffleArray()).toBe('array');
+describe('shuffleArray should return an array', () => {
+    expect(Array.isArray([shuffleArray])).toBe(true);
 })
 
-describe('shuffleArray should', () => {
-    expect(shuffleArray.length).toEqual()
+describe('shuffleArray should retu', () => {
+    expect(shuffleArray().length).toEqual(shuffleArray().length);
 })
